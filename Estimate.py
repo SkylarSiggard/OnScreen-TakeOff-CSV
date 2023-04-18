@@ -1,5 +1,6 @@
 import csv
 import os
+import math
 
 # Set up file paths
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,7 +24,34 @@ def csv_to_dict(filename):
     return result_dict
 
 def write_dict_to_csv(dictionary, csv_filename):
-    fieldnames = ['Category', 'Material', 'Size', 'Amount', 'Unit', 'Linear', 'Unit', 'Other', 'Unit',
-    'Notes', 'Waste', 'Name','Total 1', 'Total 2', 'Total 3', 'Delivery']
+    # Headers of CSV 
+    fieldnames = ['Category', 'Material', 'Amount', 'Unit', 'Linear', 'Unit', 'Other', 'Unit', 'Waste', 'Name', 'Total 1', 'Total 2', 'Total 3', 'Delivery']
+    
     with open(csv_filename, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for category, materials in dictionary.items():
+            for material, amount in materials.items():
+                # Calculate waste and round to two decimal places
+                waste = round((amount[0]*0.10)/20, 2)
+                # What is added to CSV for each row
+                row = {
+                    'Category': category,
+                    'Material': material,
+                    'Amount': amount[0],
+                    'Unit': 'SF',
+                    'Linear': amount[1],
+                    'Other': amount[2],
+                    'Waste': waste,
+                    'Name': material,
+                    'Total 1': math.ceil((amount[0]*1.10)/10)*10,
+                    'Total 2': math.ceil((amount[1]*1.10)/10)*10,
+                    'Total 3': math.ceil((amount[2]*1.10)/10)*10,
+                    'Delivery': round((amount[0]*1.10)/200, 2)
+                }
+                writer.writerow(row)
+
+if __name__=="__main__":
+    # Runs the functions above and saves the csv in the same folder
+    my_dict = csv_to_dict(data_csv)
+    write_dict_to_csv(my_dict, output_csv)
