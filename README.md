@@ -41,7 +41,3 @@ if __name__=="__main__":
 - Ensure the input CSV file (`data.csv`) is present in the same directory as this script.
 - The script performs specific calculations and transformations. Modify as per your specific requirements.
 - The output CSV file (`output.csv`) will be generated in the same directory as the script.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
