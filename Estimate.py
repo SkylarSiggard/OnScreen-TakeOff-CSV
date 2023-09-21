@@ -10,6 +10,7 @@ output_csv = os.path.join(script_dir, 'output.csv')
 # List of excluded data types
 excluded_types = {'Old', 'old', 'Attachment', 'Attachments'} 
 
+# Places CSV into a Dictionary
 def csv_to_dict(filename):
     result_dict = {}
     with open(filename, 'r') as file:
