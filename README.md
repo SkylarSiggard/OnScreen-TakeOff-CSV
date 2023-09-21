@@ -4,7 +4,12 @@ This Python script processes CSV data and generates a new CSV file with specific
 
 ## Usage
 
-1. **Set up file paths:**
+### On-Screen Setup:
+
+- For multiple areas, ensure each material is assigned to the corresponding "area". Items will be categorized by area in the Category column. All items with the same "Type" will be aggregated together, so name your types accordingly.
+- Export CSV as folows: Type, Zone, Area, Class, Num, Name, Measurement, Num1, Type1, Num2, Type2, Num3, Type3
+
+1. **Set Up File Paths:**
    - `script_dir`: Directory containing the script.
    - `data_csv`: Path to the input CSV file.
    - `output_csv`: Path to the output CSV file.
@@ -31,7 +36,7 @@ import math
 # ... (rest of the code remains the same)
 
 if __name__=="__main__":
-    # Runs the functions above and saves the csv in the same folder
+    # Runs the functions above and saves the CSV in the same folder
     my_dict = csv_to_dict(data_csv)
     write_dict_to_csv(my_dict, output_csv)
 ```
@@ -41,3 +46,7 @@ if __name__=="__main__":
 - Ensure the input CSV file (`data.csv`) is present in the same directory as this script.
 - The script performs specific calculations and transformations. Modify as per your specific requirements.
 - The output CSV file (`output.csv`) will be generated in the same directory as the script.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
