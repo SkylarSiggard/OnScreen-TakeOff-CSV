@@ -29,8 +29,8 @@ def csv_to_dict(filename):
 
 def write_dict_to_csv(dictionary, csv_filename):
     # Headers of CSV 
-    fieldnames = ['Area', 'Zone', 'Type', 'Amount 1', 'Unit', 'Amount 2', 'Unit', 'Amount 3', 'Unit', 'Waste', 'Name',
-                  'Total 1', 'Total 2', 'Total 3', 'Delivery']
+    fieldnames = ['Area', 'Zone', 'Type', 'Amount 1', 'Unit 1', 'Amount 2', 'Unit 2', 'Amount 3', 'Unit 3', 'Waste',
+                  'Name', 'Total 1', 'Total 2', 'Total 3', 'Delivery']
 
     with open(csv_filename, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -46,11 +46,11 @@ def write_dict_to_csv(dictionary, csv_filename):
                         'Zone': category_h,
                         'Type': material,
                         'Amount 1': amount[0],
-                        'Unit_1': '',
+                        'Unit 1': '',
                         'Amount 2': amount[1],
-                        'Unit_2': '',
+                        'Unit 2': '',
                         'Amount 3': amount[2],
-                        'Unit_3': '',
+                        'Unit 3': '',
                         'Waste': f'{round((waste - 1) * 100)}%',
                         'Name': material,
                         'Total 1': math.ceil((amount[0] * waste) / 10) * 10,
