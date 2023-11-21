@@ -8,14 +8,15 @@ data_csv = os.path.join(script_dir, 'data.csv')
 output_csv = os.path.join(script_dir, 'output.csv')
 
 # List of excluded data types
-excluded_types = {'Old', 'old', 'Attachment', 'Attachments', 'Skip'} 
+excluded_types = {'Old', 'old', 'Attachment', 'Attachments', 'Skip'}
+
 
 def csv_to_dict(filename):
     result_dict = {}
     with open(filename, 'r') as file:
         reader = csv.reader(file)
         for row in reader:
-            if not any(type in row for type in excluded_types):
+            if not any(type_str in row for type_str in excluded_types):
                 column_c, column_h, column_d, column_i, column_k, column_m = (
                     row[2], row[7], row[3], int(row[8]), int(row[10]), int(row[12])
                 )
@@ -25,10 +26,12 @@ def csv_to_dict(filename):
                 result_dict[column_c][column_h][column_d][2] += column_m
     return result_dict
 
+
 def write_dict_to_csv(dictionary, csv_filename):
     # Headers of CSV 
-    fieldnames = ['Area', 'Zone', 'Type', 'Amount 1', 'Unit', 'Amount 2', 'Unit', 'Amount 3', 'Unit', 'Waste', 'Name', 'Total 1', 'Total 2', 'Total 3', 'Delivery']
-    
+    fieldnames = ['Area', 'Zone', 'Type', 'Amount 1', 'Unit', 'Amount 2', 'Unit', 'Amount 3', 'Unit', 'Waste', 'Name',
+                  'Total 1', 'Total 2', 'Total 3', 'Delivery']
+
     with open(csv_filename, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
@@ -43,19 +46,20 @@ def write_dict_to_csv(dictionary, csv_filename):
                         'Zone': category_h,
                         'Type': material,
                         'Amount 1': amount[0],
-                        'Unit': '',
+                        'Unit_1': '',
                         'Amount 2': amount[1],
-                        'Unit': '',
+                        'Unit_2': '',
                         'Amount 3': amount[2],
-                        'Unit': '',
-                        'Waste': f'{round((waste-1)*100)}%',
+                        'Unit_3': '',
+                        'Waste': f'{round((waste - 1) * 100)}%',
                         'Name': material,
-                        'Total 1': math.ceil((amount[0]*waste)/10)*10,
-                        'Total 2': math.ceil((amount[1]*waste)/10)*10,
-                        'Total 3': math.ceil((amount[2]*waste)/10)*10,
-                        'Delivery': round((amount[0]*waste)/200, 2)
+                        'Total 1': math.ceil((amount[0] * waste) / 10) * 10,
+                        'Total 2': math.ceil((amount[1] * waste) / 10) * 10,
+                        'Total 3': math.ceil((amount[2] * waste) / 10) * 10,
+                        'Delivery': round((amount[0] * waste) / 200, 2)
                     }
                     writer.writerow(row)
+
 
 if __name__ == "__main__":
     # Runs the functions above and saves the csv in the same folder
