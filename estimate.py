@@ -1,6 +1,7 @@
 import csv
 import os
 import math
+import time
 
 # Set up file paths
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -65,3 +66,8 @@ if __name__ == "__main__":
     # Runs the functions above and saves the csv in the same folder
     my_dict = csv_to_dict(data_csv)
     write_dict_to_csv(my_dict, output_csv)
+    print("=" * 8)
+    print("Done!")
+    print("=" * 8)
+    time.sleep(1)
+
