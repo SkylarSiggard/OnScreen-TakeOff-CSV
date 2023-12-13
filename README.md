@@ -7,7 +7,7 @@ This Python script processes CSV data and generates a new CSV file with specific
 ### On-Screen Setup:
 
 1. **Categorization by Area:**
-   - For multiple areas, ensure each material is assigned to the corresponding "area." Items will be categorized by area in the Category column.
+   - For multiple areas, ensure each material is assigned to the corresponding "area" and "zone". Items will be categorized by area then by zone. 
    - All items with the same "Type" will be aggregated together, so name your types accordingly.
 
 2. **Export CSV Format:**
